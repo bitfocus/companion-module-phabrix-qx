@@ -18,10 +18,11 @@ export function GetConfigFields(): SomeCompanionConfigField[] {
 			type: 'number',
 			id: 'port',
 			label: 'Target Port',
+			tooltip: 'Default Port 8080 - Do Not Change',
 			width: 4,
+			default: 8080,
 			min: 1,
 			max: 65535,
-			default: 8000,
 		},
 	]
 }

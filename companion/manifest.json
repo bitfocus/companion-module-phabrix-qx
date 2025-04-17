@@ -1,16 +1,16 @@
 {
-	"id": "your-module-name",
-	"name": "your-module-name",
-	"shortname": "module-shortname",
-	"description": "A short one line description of your module",
-	"version": "0.0.0",
+	"id": "phabrix-qx",
+	"name": "phabrix-qx",
+	"shortname": "phabrix-qx",
+	"description": "Remote Control Phabrix QX Rasterizers",
+	"version": "0.1.0",
 	"license": "MIT",
-	"repository": "git+https://github.com/bitfocus/companion-module-your-module-name.git",
-	"bugs": "https://github.com/bitfocus/companion-module-your-module-name/issues",
+	"repository": "git+https://github.com/bitfocus/companion-module-phabrix-qx.git",
+	"bugs": "https://github.com/bitfocus/companion-module-phabrix-qx/issues",
 	"maintainers": [
 		{
-			"name": "Your name",
-			"email": "Your email"
+			"name": "Leopold Strobl",
+			"email": "leopold.strobl@vt-media.de"
 		}
 	],
 	"runtime": {
@@ -20,7 +20,7 @@
 		"entrypoint": "../dist/main.js"
 	},
 	"legacyIds": [],
-	"manufacturer": "Your company",
-	"products": ["Your product"],
+	"manufacturer": "Phabrix",
+	"products": ["QX12G"],
 	"keywords": []
 }

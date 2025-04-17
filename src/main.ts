@@ -4,6 +4,7 @@ import { UpdateVariableDefinitions } from './variables.js'
 import { UpgradeScripts } from './upgrades.js'
 import { UpdateActions } from './actions.js'
 import { UpdateFeedbacks } from './feedbacks.js'
+import fetch from 'node-fetch'
 
 export class ModuleInstance extends InstanceBase<ModuleConfig> {
 	config!: ModuleConfig // Setup in init()
@@ -45,6 +46,56 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 
 	updateVariableDefinitions(): void {
 		UpdateVariableDefinitions(this)
+	}
+
+	async apiPost(path: string, body: Record<string, any>): Promise<any> {
+		const url = `http://${this.config.host}:${this.config.port}/api/v1${path}`
+		try {
+			const response = await fetch(url, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body),
+			})
+			if (!response.ok) throw new Error(await response.text())
+			return await response.json()
+		} catch (error) {
+			this.log('error', `POST ${path} failed: ${error}`)
+			return null
+		}
+	}
+
+	async apiPut(path: string, body: Record<string, any>): Promise<any> {
+		this.log('debug', 'Send Put request')
+		const url = `http://${this.config.host}:${this.config.port}/api/v1${path}`
+		try {
+			const response = await fetch(url, {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body),
+			})
+			if (!response.ok) throw new Error(await response.text())
+
+			const text = await response.text()
+			return text ? JSON.parse(text) : undefined
+		} catch (error) {
+			this.log('error', `PUT ${path} failed: ${error}`)
+			return null
+		}
+	}
+
+	async apiDelete(path: string): Promise<any> {
+		const url = `http://${this.config.host}:${this.config.port}/api/v1${path}`
+		try {
+			const response = await fetch(url, {
+				method: 'DELETE',
+				headers: { 'Content-Type': 'application/json' },
+			})
+			if (!response.ok) throw new Error(await response.text())
+			return await response.json()
+		} catch (error) {
+			this.log('error', `DELETE ${path} failed: ${error}`)
+			return null
+		}
 	}
 }
 
