@@ -210,6 +210,7 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 		}
 
 		this.setVariableValues(variableValues)
+		return
 	}
 }
 
