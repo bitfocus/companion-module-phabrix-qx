@@ -97,6 +97,24 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 			return null
 		}
 	}
+
+	async apiGet(path: string): Promise<any> {
+		this.log('debug', 'Send GET request')
+		const url = `http://${this.config.host}:${this.config.port}/api/v1${path}`
+		try {
+			const response = await fetch(url, {
+				method: 'GET',
+				headers: { 'Content-Type': 'application/json' },
+			})
+			if (!response.ok) throw new Error(await response.text())
+
+			const text = await response.text()
+			return text ? JSON.parse(text) : undefined
+		} catch (error) {
+			this.log('error', `GET ${path} failed: ${error}`)
+			return null
+		}
+	}
 }
 
 runEntrypoint(ModuleInstance, UpgradeScripts)
