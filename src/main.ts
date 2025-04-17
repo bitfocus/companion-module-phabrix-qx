@@ -21,6 +21,9 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 		this.updateActions() // export actions
 		this.updateFeedbacks() // export feedbacks
 		this.updateVariableDefinitions() // export variable definitions
+
+		//todo: fill in all Variable Updates
+		await this.updateSystemInfoVariables()
 	}
 	// When module gets deleted
 	async destroy(): Promise<void> {
@@ -114,6 +117,81 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 			this.log('error', `GET ${path} failed: ${error}`)
 			return null
 		}
+	}
+
+	//Variable Update Methods
+
+	async updateSystemInfoVariables(): Promise<void> {
+		const info = await this.apiGet('/system/about')
+		if (!info) {
+			this.log('error', 'Failed to retrieve /system/about')
+			return
+		}
+
+		const getGain = (obj: any, field: string) => String(obj?.[field] ?? '')
+
+		const variableValues: Record<string, any> = {
+			currentFirmwareMode: String(info.currentFirmwareMode ?? ''),
+			currentSystemMode: String(info.currentSystemMode ?? ''),
+			device: String(info.device ?? ''),
+			fpgaVersion: String(info.fpgaVersion ?? ''),
+			frontPanelRevision: String(info.frontPanelRevision ?? ''),
+			imageVersion: String(info.imageVersion ?? ''),
+			jitterAdcSpan: String(info.jitterAdcSpan ?? ''),
+			mainBoardRevision: String(info.mainBoardRevision ?? ''),
+			mezzanineBoardRevision: String(info.mezzanineBoardRevision ?? ''),
+			sha: String(info.sha ?? ''),
+			softwareBranch: String(info.softwareBranch ?? ''),
+			softwareNumber: String(info.softwareNumber ?? ''),
+			softwareVersion: String(info.softwareVersion ?? ''),
+			status: String(info.status ?? ''),
+			timeOnUnit: String(info.timeOnUnit ?? ''),
+			toolchainVersion: String(info.toolchainVersion ?? ''),
+			message: String(info.message ?? ''),
+
+			// Driver A-D
+			driver_a_gain_1_5g: String(info.driver?.A?.['gain_1.5G'] ?? ''),
+			driver_a_gain_3g: String(info.driver?.A?.['gain_3G'] ?? ''),
+			driver_a_gain_6g: String(info.driver?.A?.['gain_6G'] ?? ''),
+			driver_a_gain_12g: String(info.driver?.A?.['gain_12G'] ?? ''),
+
+			driver_b_gain_1_5g: String(info.driver?.B?.['gain_1.5G'] ?? ''),
+			driver_b_gain_3g: String(info.driver?.B?.['gain_3G'] ?? ''),
+			driver_b_gain_6g: String(info.driver?.B?.['gain_6G'] ?? ''),
+			driver_b_gain_12g: String(info.driver?.B?.['gain_12G'] ?? ''),
+
+			driver_c_gain_1_5g: String(info.driver?.C?.['gain_1.5G'] ?? ''),
+			driver_c_gain_3g: String(info.driver?.C?.['gain_3G'] ?? ''),
+			driver_c_gain_6g: String(info.driver?.C?.['gain_6G'] ?? ''),
+			driver_c_gain_12g: String(info.driver?.C?.['gain_12G'] ?? ''),
+
+			driver_d_gain_1_5g: String(info.driver?.D?.['gain_1.5G'] ?? ''),
+			driver_d_gain_3g: String(info.driver?.D?.['gain_3G'] ?? ''),
+			driver_d_gain_6g: String(info.driver?.D?.['gain_6G'] ?? ''),
+			driver_d_gain_12g: String(info.driver?.D?.['gain_12G'] ?? ''),
+
+			// Eye
+			eye_dcGain: String(info.eye?.dcGain ?? ''),
+			eye_gain: String(info.eye?.gain ?? ''),
+			eye_offset: String(info.eye?.offset ?? ''),
+			eye_eyeCalRevision: String(info.eye?.eyeCalRevision ?? ''),
+
+			// Eye display gains
+			eye_display_gain_270m: getGain(info.eye?.displayGains, 'gain_270M'),
+			eye_display_gain_1_5g: getGain(info.eye?.displayGains, 'gain_1.5G'),
+			eye_display_gain_3g: getGain(info.eye?.displayGains, 'gain_3G'),
+			eye_display_gain_6g: getGain(info.eye?.displayGains, 'gain_6G'),
+			eye_display_gain_12g: getGain(info.eye?.displayGains, 'gain_12G'),
+
+			// Eye measurement gains
+			eye_measure_gain_270m: getGain(info.eye?.measurementGains, 'gain_270M'),
+			eye_measure_gain_1_5g: getGain(info.eye?.measurementGains, 'gain_1.5G'),
+			eye_measure_gain_3g: getGain(info.eye?.measurementGains, 'gain_3G'),
+			eye_measure_gain_6g: getGain(info.eye?.measurementGains, 'gain_6G'),
+			eye_measure_gain_12g: getGain(info.eye?.measurementGains, 'gain_12G'),
+		}
+
+		this.setVariableValues(variableValues)
 	}
 }
 
