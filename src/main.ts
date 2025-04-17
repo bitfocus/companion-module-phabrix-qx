@@ -24,6 +24,9 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 
 		//todo: fill in all Variable Updates
 		await this.updateSystemInfoVariables()
+
+		//Start Polling loop
+		await this.startVariableUpdatePolling()
 	}
 	// When module gets deleted
 	async destroy(): Promise<void> {
@@ -117,6 +120,21 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 			this.log('error', `GET ${path} failed: ${error}`)
 			return null
 		}
+	}
+
+	private _updateVariableInterval: NodeJS.Timeout | undefined
+
+	async startVariableUpdatePolling(): Promise<void> {
+		if (this._updateVariableInterval) {
+			clearInterval(this._updateVariableInterval)
+			this._updateVariableInterval = undefined
+		}
+
+		this._updateVariableInterval = setInterval(() => {
+			this.updateSystemInfoVariables().catch((err) => {
+				this.log('error', `System info polling failed: ${err}`)
+			})
+		}, 1000)
 	}
 
 	//Variable Update Methods
