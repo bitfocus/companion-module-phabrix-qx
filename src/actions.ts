@@ -1169,5 +1169,23 @@ export function UpdateActions(self: ModuleInstance): void {
 				await self.apiPut('/generator/bouncingBox', payload)
 			},
 		},
+		GeneratorOutputCopyEnabled: {
+			name: 'Enable Generator Output Copy',
+			options: [
+				{
+					id: 'action',
+					type: 'checkbox',
+					label: 'Action',
+					default: true,
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					enabled: o.action,
+				}
+				await self.apiPut('/generator/outputCopy', payload)
+			},
+		},
 	})
 }
