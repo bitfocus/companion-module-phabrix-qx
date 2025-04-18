@@ -1348,23 +1348,15 @@ export function UpdateActions(self: ModuleInstance): void {
 				await self.apiPut('/generator/sdiOutputMute', payload)
 			},
 		},
-		GeneratorSdiOutputMute: {
-			name: 'Mute Generator SDI Out',
-			options: [
-				{ id: 'sdiOutputMuteA', type: 'checkbox', label: 'SDI Output Mute A', default: false },
-				{ id: 'sdiOutputMuteB', type: 'checkbox', label: 'SDI Output Mute B', default: false },
-				{ id: 'sdiOutputMuteC', type: 'checkbox', label: 'SDI Output Mute C', default: false },
-				{ id: 'sdiOutputMuteD', type: 'checkbox', label: 'SDI Output Mute D', default: false },
-			],
+		GeneratorSdiScrambler: {
+			name: 'Enable Generator SDI Scrambler',
+			options: [{ id: 'enabled', type: 'checkbox', label: 'SDI Scrambler enabled', default: false }],
 			callback: async (event) => {
 				const o = event.options
 				const payload = {
-					sdiOutputMuteA: o.sdiOutputMuteA,
-					sdiOutputMuteB: o.sdiOutputMuteB,
-					sdiOutputMuteC: o.sdiOutputMuteC,
-					sdiOutputMuteD: o.sdiOutputMuteD,
+					enabled: o.enabled,
 				}
-				await self.apiPut('/generator/sdiOutputMute', payload)
+				await self.apiPut('/generator/sdiScrambler', payload)
 			},
 		},
 	})
