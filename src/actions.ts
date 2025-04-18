@@ -1187,5 +1187,57 @@ export function UpdateActions(self: ModuleInstance): void {
 				await self.apiPut('/generator/outputCopy', payload)
 			},
 		},
+		GeneratorOutputOffset: {
+			name: 'Configure Generator Output Offset',
+			options: [
+				{
+					id: 'action',
+					type: 'dropdown',
+					label: 'Action',
+					default: '',
+					choices: [
+						{ id: '', label: 'Nothing' },
+						{ id: 'clearOffsets', label: 'Clear Offsets' },
+					],
+				},
+				{
+					id: 'offsetType',
+					type: 'dropdown',
+					label: 'Offset Type',
+					default: 'linesAndPixels',
+					choices: [
+						{ id: 'linesAndPixels', label: 'Lines and Pixels' },
+						{ id: 'time', label: 'Time' },
+					],
+				},
+				{
+					id: 'outputLineOffset',
+					type: 'number',
+					label: 'Output Line Offset',
+					default: 0,
+					min: -999999,
+					max: 999999,
+				},
+				{
+					id: 'outputTimeOffsetus',
+					type: 'number',
+					label: 'Output Time Offset (us)',
+					default: 0,
+					min: -999999,
+					max: 999999,
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					action: o.action,
+					offsetType: o.offsetType,
+					outputLineOffset: o.outputLineOffset,
+					outputPixelOffset: o.outputPixelOffset,
+					outputTimeOffset_us: o.outputTimeOffset_us,
+				}
+				await self.apiPut('/generator/outputOffset', payload)
+			},
+		},
 	})
 }
