@@ -1114,21 +1114,59 @@ export function UpdateActions(self: ModuleInstance): void {
 				const o = event.options
 
 				const payload = {
-					ident: {
-						enabled: o.enabled,
-						text: o.text,
-						justify: o.justify,
-						location: o.location,
-						size: o.size,
-						textColour: o.textColour,
-						textOpacity_percent: o.textOpacity_percent,
-						backgroundEnabled: o.backgroundEnabled,
-						backgroundColour: o.backgroundColour,
-						backgroundOpacity_percent: o.backgroundOpacity_percent,
-					},
+					enabled: o.enabled,
+					text: o.text,
+					justify: o.justify,
+					location: o.location,
+					size: o.size,
+					textColour: o.textColour,
+					textOpacity_percent: o.textOpacity_percent,
+					backgroundEnabled: o.backgroundEnabled,
+					backgroundColour: o.backgroundColour,
+					backgroundOpacity_percent: o.backgroundOpacity_percent,
 				}
 
 				await self.apiPut('/generator/ident', payload)
+			},
+		},
+		GeneratorJitterInsertion: {
+			name: 'Configure Generator Jitter Insertion',
+			options: [
+				{
+					id: 'mode',
+					type: 'dropdown',
+					label: 'Mode',
+					default: 'Disabled',
+					choices: [
+						{ id: 'Disabled', label: 'Disabled' },
+						{ id: 'Sine', label: 'Sine' },
+					],
+				},
+				{
+					id: 'amplitudePeakToPeakUi',
+					type: 'number',
+					label: 'Amplitude Peak to Peak',
+					default: 0.01,
+					min: 0.01,
+					max: 127.99,
+				},
+				{
+					id: 'frequencyHz',
+					type: 'number',
+					label: 'Frequency (Hz)',
+					default: 4000,
+					min: 10,
+					max: 10000000,
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					AmplitudePeakToPeak_ui: o.amplitudePeakToPeakUi,
+					frequency_Hz: o.frequencyHz,
+					mode: o.mode,
+				}
+				await self.apiPut('/generator/bouncingBox', payload)
 			},
 		},
 	})
