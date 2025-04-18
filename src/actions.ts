@@ -989,5 +989,147 @@ export function UpdateActions(self: ModuleInstance): void {
 				await self.apiPut('/generator/audio', payload)
 			},
 		},
+
+		GeneratorBouncingBoxEnabled: {
+			name: 'Enable Generator Bouncing Box',
+			options: [
+				{
+					id: 'action',
+					type: 'dropdown',
+					label: 'Action',
+					default: 'enable',
+					choices: [
+						{ id: 'enable', label: 'Enable' },
+						{ id: 'disable', label: 'Disable' },
+					],
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					enabled: o.action,
+				}
+				await self.apiPut('/generator/bouncingBox', payload)
+			},
+		},
+
+		generatorIdentPut: {
+			name: 'Configure Ident Generator Parameters',
+			options: [
+				{
+					id: 'enabled',
+					type: 'checkbox',
+					label: 'Ident Enabled',
+					default: true,
+				},
+				{
+					id: 'text',
+					type: 'textinput',
+					label: 'Ident Text',
+					default: 'My Ident Text',
+				},
+				{
+					id: 'justify',
+					type: 'dropdown',
+					label: 'Justify',
+					default: 'centre',
+					choices: [
+						{ id: 'left', label: 'Left' },
+						{ id: 'centre', label: 'Centre' },
+						{ id: 'right', label: 'Right' },
+					],
+				},
+				{
+					id: 'location',
+					type: 'dropdown',
+					label: 'Location',
+					default: 'bottom',
+					choices: [
+						{ id: 'topLeft', label: 'Top Left' },
+						{ id: 'top', label: 'Top' },
+						{ id: 'topRight', label: 'Top Right' },
+						{ id: 'left', label: 'Left' },
+						{ id: 'centre', label: 'Centre' },
+						{ id: 'right', label: 'Right' },
+						{ id: 'bottomLeft', label: 'Bottom Left' },
+						{ id: 'bottom', label: 'Bottom' },
+						{ id: 'bottomRight', label: 'Bottom Right' },
+					],
+				},
+				{
+					id: 'size',
+					type: 'dropdown',
+					label: 'Size',
+					default: 'medium',
+					choices: [
+						{ id: 'small', label: 'Small' },
+						{ id: 'medium', label: 'Medium' },
+						{ id: 'large', label: 'Large' },
+					],
+				},
+				{
+					id: 'textColour',
+					type: 'textinput',
+					label: 'Text Colour (hex)',
+					default: '#FFFFFF',
+				},
+				{
+					id: 'textOpacity_percent',
+					type: 'dropdown',
+					label: 'Text Opacity (%)',
+					default: 100,
+					choices: [
+						{ id: 25, label: '25%' },
+						{ id: 50, label: '50%' },
+						{ id: 75, label: '75%' },
+						{ id: 100, label: '100%' },
+					],
+				},
+				{
+					id: 'backgroundEnabled',
+					type: 'checkbox',
+					label: 'Enable Background',
+					default: true,
+				},
+				{
+					id: 'backgroundColour',
+					type: 'textinput',
+					label: 'Background Colour (hex)',
+					default: '#000000',
+				},
+				{
+					id: 'backgroundOpacity_percent',
+					type: 'dropdown',
+					label: 'Background Opacity (%)',
+					default: 50,
+					choices: [
+						{ id: 25, label: '25%' },
+						{ id: 50, label: '50%' },
+						{ id: 75, label: '75%' },
+						{ id: 100, label: '100%' },
+					],
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+
+				const payload = {
+					ident: {
+						enabled: o.enabled,
+						text: o.text,
+						justify: o.justify,
+						location: o.location,
+						size: o.size,
+						textColour: o.textColour,
+						textOpacity_percent: o.textOpacity_percent,
+						backgroundEnabled: o.backgroundEnabled,
+						backgroundColour: o.backgroundColour,
+						backgroundOpacity_percent: o.backgroundOpacity_percent,
+					},
+				}
+
+				await self.apiPut('/generator/ident', payload)
+			},
+		},
 	})
 }
