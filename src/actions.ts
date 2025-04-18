@@ -1329,5 +1329,43 @@ export function UpdateActions(self: ModuleInstance): void {
 				await self.apiPut('/generator/sdiDriverPreEmphasis', payload)
 			},
 		},
+		GeneratorSdiOutputMute: {
+			name: 'Mute Generator SDI Out',
+			options: [
+				{ id: 'sdiOutputMuteA', type: 'checkbox', label: 'SDI Output Mute A', default: false },
+				{ id: 'sdiOutputMuteB', type: 'checkbox', label: 'SDI Output Mute B', default: false },
+				{ id: 'sdiOutputMuteC', type: 'checkbox', label: 'SDI Output Mute C', default: false },
+				{ id: 'sdiOutputMuteD', type: 'checkbox', label: 'SDI Output Mute D', default: false },
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					sdiOutputMuteA: o.sdiOutputMuteA,
+					sdiOutputMuteB: o.sdiOutputMuteB,
+					sdiOutputMuteC: o.sdiOutputMuteC,
+					sdiOutputMuteD: o.sdiOutputMuteD,
+				}
+				await self.apiPut('/generator/sdiOutputMute', payload)
+			},
+		},
+		GeneratorSdiOutputMute: {
+			name: 'Mute Generator SDI Out',
+			options: [
+				{ id: 'sdiOutputMuteA', type: 'checkbox', label: 'SDI Output Mute A', default: false },
+				{ id: 'sdiOutputMuteB', type: 'checkbox', label: 'SDI Output Mute B', default: false },
+				{ id: 'sdiOutputMuteC', type: 'checkbox', label: 'SDI Output Mute C', default: false },
+				{ id: 'sdiOutputMuteD', type: 'checkbox', label: 'SDI Output Mute D', default: false },
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					sdiOutputMuteA: o.sdiOutputMuteA,
+					sdiOutputMuteB: o.sdiOutputMuteB,
+					sdiOutputMuteC: o.sdiOutputMuteC,
+					sdiOutputMuteD: o.sdiOutputMuteD,
+				}
+				await self.apiPut('/generator/sdiOutputMute', payload)
+			},
+		},
 	})
 }
