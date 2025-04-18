@@ -1239,5 +1239,38 @@ export function UpdateActions(self: ModuleInstance): void {
 				await self.apiPut('/generator/outputOffset', payload)
 			},
 		},
+		GeneratorPrbs: {
+			name: 'Configure Generator PRBS',
+			options: [
+				{
+					id: 'invert',
+					type: 'checkbox',
+					label: 'Invert',
+					default: false,
+				},
+				{
+					id: 'mode',
+					type: 'dropdown',
+					label: 'Mode',
+					default: 'Disabled',
+					choices: [
+						{ id: 'Disabled', label: 'Disabled' },
+						{ id: 'PRBS-7', label: 'PRBS-7' },
+						{ id: 'PRBS-9', label: 'PRBS-9' },
+						{ id: 'PRBS-15', label: 'PRBS-15' },
+						{ id: 'PRBS-23', label: 'PRBS-23' },
+						{ id: 'PRBS-31', label: 'PRBS-31' },
+					],
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					invert: o.invert,
+					mode: o.mode,
+				}
+				await self.apiPut('/generator/prbs', payload)
+			},
+		},
 	})
 }
