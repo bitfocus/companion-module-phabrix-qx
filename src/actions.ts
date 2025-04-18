@@ -1272,5 +1272,62 @@ export function UpdateActions(self: ModuleInstance): void {
 				await self.apiPut('/generator/prbs', payload)
 			},
 		},
+		GeneratorSdiDriverGain: {
+			name: 'Configure Generator SDI Driver Gain',
+			options: [
+				{
+					id: 'driverGainPercent',
+					type: 'number',
+					label: 'Driver Gain (%)',
+					default: 100,
+					min: 90,
+					max: 110,
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					driverGain_percent: o.driverGainPercent,
+				}
+				await self.apiPut('/generator/sdiDriverGain', payload)
+			},
+		},
+		GeneratorSdiDriverPreEmphasis: {
+			name: 'Configure Generator SDI Driver Pre Emphasis',
+			options: [
+				{
+					id: 'driverPreEmphasis',
+					type: 'dropdown',
+					label: 'Pre Emphasis',
+					default: 'Disabled',
+					choices: [
+						{ id: 'Disabled', label: 'Disabled' },
+						{ id: '0.5 dB', label: '0.5 dB' },
+						{ id: '1.0 dB', label: '1.0 dB' },
+						{ id: '1.5 dB', label: '1.5 dB' },
+					],
+				},
+				{
+					id: 'driverPreEmphasisTimeConstant',
+					type: 'dropdown',
+					label: 'Pre Emphasis Time Constant',
+					default: 'Default',
+					choices: [
+						{ id: 'Default', label: 'Default' },
+						{ id: 'Div 2', label: 'Div 2' },
+						{ id: 'Div 4', label: 'Div 4' },
+						{ id: 'Div 8', label: 'Div 8' },
+					],
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					driverPreEmphasis: o.driverPreEmphasis,
+					driverPreEmphasisTimeConstant: o.driverPreEmphasisTimeConstant,
+				}
+				await self.apiPut('/generator/sdiDriverPreEmphasis', payload)
+			},
+		},
 	})
 }
