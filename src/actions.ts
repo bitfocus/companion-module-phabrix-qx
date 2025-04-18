@@ -1359,5 +1359,177 @@ export function UpdateActions(self: ModuleInstance): void {
 				await self.apiPut('/generator/sdiScrambler', payload)
 			},
 		},
+		generatorStandards: {
+			name: 'SetUp and Enable the Generator',
+			options: [
+				{ id: 'manualOverrideEnabled', type: 'checkbox', label: 'Manual Override Enabled', default: false },
+
+				{
+					id: 'format',
+					type: 'dropdown',
+					label: 'Format',
+					default: 'YCbCr:422:10',
+					choices: [
+						{ id: 'YCbCr:422:10', label: 'YCbCr:422:10' },
+						{ id: 'YCbCr:422:12', label: 'YCbCr:422:12' },
+						{ id: 'YCbCrA:4224:12', label: 'YCbCrA:4224:12' },
+						{ id: 'YCbCr:444:10', label: 'YCbCr:444:10' },
+						{ id: 'YCbCr:444:12', label: 'YCbCr:444:12' },
+						{ id: 'YCbCrA:4444:10', label: 'YCbCrA:4444:10' },
+						{ id: 'RGB:444:10', label: 'RGB:444:10' },
+						{ id: 'RGB:444:12', label: 'RGB:444:12' },
+						{ id: 'RGBA:4444:10', label: 'RGBA:4444:10' },
+					],
+				},
+				{
+					id: 'frame',
+					type: 'dropdown',
+					label: 'Frame Rate',
+					default: 'i50',
+					choices: [
+						{ id: 'p2398', label: '23.98p' },
+						{ id: 'psf2398', label: '23.98psf' },
+						{ id: 'p24', label: '24p' },
+						{ id: 'psf24', label: '24psf' },
+						{ id: 'p25', label: '25p' },
+						{ id: 'psf25', label: '25psf' },
+						{ id: 'p2997', label: '29.97p' },
+						{ id: 'psf2997', label: '29.97psf' },
+						{ id: 'p30', label: '30p' },
+						{ id: 'psf30', label: '30psf' },
+						{ id: 'p4795', label: '47.95p' },
+						{ id: 'p48', label: '48p' },
+						{ id: 'i50', label: '50i' },
+						{ id: 'p50', label: '50p' },
+						{ id: 'i5994', label: '59.94i' },
+						{ id: 'p5994', label: '59.94p' },
+						{ id: 'i60', label: '60i' },
+						{ id: 'p60', label: '60p' },
+					],
+				},
+				{
+					id: 'gamut',
+					type: 'dropdown',
+					label: 'Gamut',
+					default: '709',
+					choices: [
+						{ id: 'Rec.709', label: '709' },
+						{ id: 'Rec.2020', label: '2020' },
+						{ id: 'HLG_Rec.2020', label: 'HLG 2020' },
+						{ id: 'PQ.2020', label: 'PQ 2020' },
+						{ id: 'S-Log3.2020', label: 'S-Log3 2020' },
+					],
+				},
+				{
+					id: 'type',
+					type: 'dropdown',
+					label: 'Type',
+					default: '3G A',
+					choices: [
+						{ id: '12G 2-SI', label: '12G 2-SI' },
+						{ id: 'QL 3G A 2-SI', label: 'QL 3G A 2-SI' },
+						{ id: 'QL 3G A SqDv', label: 'QL 3G A SqDv' },
+						{ id: 'QL 3G B 2-SI', label: 'QL 3G B 2-SI' },
+						{ id: 'QL 3G B SqDv', label: 'QL 3G B SqDv' },
+						{ id: 'DL 6G 2-SI', label: 'DL 6G 2-SI' },
+						{ id: '6G 2-SI', label: '6G 2-SI' },
+						{ id: 'QL 1.5G SqDv', label: 'QL 1.5G SqDv' },
+						{ id: '3G A', label: '3G A' },
+						{ id: '3G B', label: '3G B' },
+						{ id: '1.5G', label: '1.5G' },
+					],
+				},
+				{
+					id: 'width',
+					type: 'dropdown',
+					label: 'Width',
+					default: 1920,
+					choices: [
+						{ id: 1280, label: '1280' },
+						{ id: 1920, label: '1920' },
+						{ id: 2048, label: '2048' },
+						{ id: 3840, label: '3840' },
+						{ id: 4096, label: '4096' },
+					],
+				},
+				{
+					id: 'height',
+					type: 'dropdown',
+					label: 'Height',
+					default: 1080,
+					choices: [
+						{ id: 720, label: '720' },
+						{ id: 1080, label: '1080' },
+						{ id: 2160, label: '2160' },
+					],
+				},
+				{
+					id: 'bartype',
+					type: 'dropdown',
+					label: 'BarType',
+					default: '100%25%20Bars',
+					choices: [{ id: '100%25%20Bars', label: '100/25/20 Bars' }],
+				},
+				{
+					id: 'action',
+					type: 'dropdown',
+					label: 'Action',
+					default: 'start',
+					choices: [
+						{ id: 'start', label: 'Start' },
+
+						{ id: '', label: 'Nothing' },
+					],
+				},
+				{
+					id: 'pathologicalType',
+					type: 'dropdown',
+					label: 'PathologicalType',
+					default: 'CheckField',
+					choices: [
+						{ id: 'Eq', label: 'Eq' },
+
+						{ id: 'PLL', label: 'PLL' },
+						{ id: 'CLK', label: 'CLK' },
+						{ id: 'CheckField + CLK', label: 'CheckField + CLK' },
+						{ id: 'CheckField', label: 'CheckField' },
+					],
+				},
+				{
+					id: 'pathologicalPairs',
+					type: 'number',
+					label: 'Pathological Pairs',
+					default: 0,
+					min: 0,
+					max: 16384,
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					action: o.action,
+					pathological: {
+						pairs: o.pathologicalPairs,
+						type: o.pathologicalType,
+					},
+				}
+				await self.apiPut(
+					'/generator/standards/' +
+						o.width +
+						'x' +
+						o.height +
+						o.frame +
+						'/' +
+						o.format +
+						'/' +
+						o.type +
+						'_' +
+						o.gamut +
+						'/' +
+						o.bartype,
+					payload,
+				)
+			},
+		},
 	})
 }
