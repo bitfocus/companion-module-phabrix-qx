@@ -1531,5 +1531,23 @@ export function UpdateActions(self: ModuleInstance): void {
 				)
 			},
 		},
+		GeneratorSyncBitInserter: {
+			name: 'Enable Generator Sync Bit Inserter',
+			options: [
+				{
+					id: 'enabled',
+					type: 'checkbox',
+					label: 'Enabled',
+					default: false,
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					enabled: o.enabled,
+				}
+				await self.apiPut('/generator/syncBitInserter', payload)
+			},
+		},
 	})
 }
