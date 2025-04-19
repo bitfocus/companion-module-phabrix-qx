@@ -1549,5 +1549,187 @@ export function UpdateActions(self: ModuleInstance): void {
 				await self.apiPut('/generator/syncBitInserter', payload)
 			},
 		},
+		inputOutputSdiInInputType: {
+			name: 'Configure SDI Input Type',
+			options: [
+				{
+					id: 'type',
+					type: 'dropdown',
+					label: 'SDI Input Type',
+					default: 'BNC',
+					choices: [
+						{ id: 'bnc', label: 'BNC' },
+						{ id: 'sfp', label: 'SFP' },
+					],
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					type: o.type,
+				}
+				await self.apiPut('/inputOutput/sdiIn/inputType', payload)
+			},
+		},
+		inputOutputSdiOutBncGeneratorOutputCopy: {
+			name: 'Configure SDI Out BNC Generator Output Copy',
+			options: [
+				{
+					id: 'enabled',
+					type: 'checkbox',
+					label: 'SDI Output Generator Copy',
+					default: false,
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					enabled: o.enabled,
+				}
+				await self.apiPut('/inputOutput/sdiOut/bnc/generatorOutputCopy', payload)
+			},
+		},
+		inputOutputSdiOutBncLoopSdiBncIn: {
+			name: 'Enable Loop SDI BNC in',
+			options: [
+				{
+					id: 'enabled',
+					type: 'checkbox',
+					label: 'Loop SDI to BNC in',
+					default: false,
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					enabled: o.enabled,
+				}
+				await self.apiPut('/inputOutput/sdiOut/bnc/loopSdiBncIn', payload)
+			},
+		},
+		inputOutputSdiOutBncSdiOutputSetting: {
+			name: 'Change SDI Output Settings',
+			options: [
+				{
+					id: 'sdiOutputA',
+					type: 'dropdown',
+					label: 'SDI Output A',
+					default: 'off',
+					choices: [
+						{ id: 'off', label: 'off' },
+						{ id: 'generator', label: 'Generator' },
+						{ id: 'loopSdiIn', label: 'Loop SDI In' },
+					],
+				},
+				{
+					id: 'sdiOutputB',
+					type: 'dropdown',
+					label: 'SDI Output B',
+					default: 'off',
+					choices: [
+						{ id: 'off', label: 'off' },
+						{ id: 'generator', label: 'Generator' },
+						{ id: 'loopSdiIn', label: 'Loop SDI In' },
+					],
+				},
+				{
+					id: 'sdiOutputC',
+					type: 'dropdown',
+					label: 'SDI Output C',
+					default: 'off',
+					choices: [
+						{ id: 'off', label: 'off' },
+						{ id: 'generator', label: 'Generator' },
+						{ id: 'loopSdiIn', label: 'Loop SDI In' },
+					],
+				},
+				{
+					id: 'sdiOutputD',
+					type: 'dropdown',
+					label: 'SDI Output D',
+					default: 'off',
+					choices: [
+						{ id: 'off', label: 'off' },
+						{ id: 'generator', label: 'Generator' },
+						{ id: 'loopSdiIn', label: 'Loop SDI In' },
+					],
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					sdiOutputA: o.sdiOutputA,
+					sdiOutputB: o.sdiOutputB,
+					sdiOutputC: o.sdiOutputC,
+					sdiOutputD: o.sdiOutputD,
+				}
+				await self.apiPut('/inputOutput/sdiOut/bnc/sdiOutputSetting', payload)
+			},
+		},
+		inputOutputSdiOutOutputType: {
+			name: 'Configure SDI Output Type',
+			options: [
+				{
+					id: 'type',
+					type: 'dropdown',
+					label: 'SDI Output Type',
+					default: 'BNC',
+					choices: [
+						{ id: 'bnc', label: 'BNC' },
+						{ id: 'sfp', label: 'SFP' },
+					],
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					type: o.type,
+				}
+				await self.apiPut('/inputOutput/sdiOut/outputType', payload)
+			},
+		},
+		inputOutputSdiOutSFPGeneratorOutputCopy: {
+			name: 'Configure SDI Out SFP Generator Output Copy',
+			options: [
+				{
+					id: 'enabled',
+					type: 'checkbox',
+					label: 'SFP Output Generator Copy',
+					default: false,
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					enabled: o.enabled,
+				}
+				await self.apiPut('/inputOutput/sdiOut/sfp/generatorOutputCopy', payload)
+			},
+		},
+		inputOutputSdiOutSfpSdiOutputSetting: {
+			name: 'Configure SDI Out SFP Setting',
+			options: [
+				{
+					id: 'sdiOutputA',
+					type: 'dropdown',
+					label: 'SFP SDI Output A',
+					default: 'off',
+					choices: [
+						{ id: 'off', label: 'Off' },
+
+						{ id: 'generator', label: 'Generator' },
+					],
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					sdiOutputA: o.sdiOutputA,
+
+					sdiOutputB: o.sdiOutputB,
+				}
+				await self.apiPut('/inputOutput/sdiOut/sfp/sdiOutputSetting', payload)
+			},
+		},
 	})
 }
