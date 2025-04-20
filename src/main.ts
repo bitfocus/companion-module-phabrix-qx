@@ -7,6 +7,8 @@ import { UpdateFeedbacks } from './feedbacks.js'
 import fetch from 'node-fetch'
 
 export class ModuleInstance extends InstanceBase<ModuleConfig> {
+	variableUpdateEnabled: boolean = false
+
 	config!: ModuleConfig // Setup in init()
 
 	constructor(internal: unknown) {
@@ -26,10 +28,11 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 		await this.updateSystemInfoVariables()
 
 		//Start Polling loop
-		await this.startVariableUpdatePolling()
+		await this.pollVariables()
 	}
 	// When module gets deleted
 	async destroy(): Promise<void> {
+		this.variableUpdateEnabled = false
 		this.log('debug', 'destroy')
 	}
 
@@ -122,19 +125,15 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 		}
 	}
 
-	private _updateVariableInterval: NodeJS.Timeout | undefined
-
-	async startVariableUpdatePolling(): Promise<void> {
-		if (this._updateVariableInterval) {
-			clearInterval(this._updateVariableInterval)
-			this._updateVariableInterval = undefined
-		}
-
-		this._updateVariableInterval = setInterval(() => {
-			this.updateSystemInfoVariables().catch((err) => {
+	private async pollVariables(): Promise<void> {
+		while (this.variableUpdateEnabled) {
+			try {
+				await this.updateSystemInfoVariables()
+			} catch (err) {
 				this.log('error', `System info polling failed: ${err}`)
-			})
-		}, 1000)
+			}
+			await new Promise((resolve) => setTimeout(resolve, 1000))
+		}
 	}
 
 	//Variable Update Methods
