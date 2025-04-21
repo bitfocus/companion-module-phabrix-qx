@@ -21,7 +21,8 @@ export function GetConfigFields(): SomeCompanionConfigField[] {
 			tooltip: 'Default Port 8080 - Do Not Change',
 			width: 4,
 			default: 8080,
-			regex: Regex.PORT,
+			min: 1,
+			max: 65535,
 		},
 	]
 }
