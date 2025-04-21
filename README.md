@@ -3,4 +3,4 @@
 See [HELP.md](./companion/HELP.md) and [LICENSE](./LICENSE)
 
 ## Reference
-API-Reference used can be found here: https://phabrix.com/api/qx12g.htm
+API-Reference used can be found here: https://phabrix.com/api/qx12g.html
