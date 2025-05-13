@@ -8,26 +8,110 @@ export function UpdateActions(self: ModuleInstance): void {
 				// AES1
 				{ id: 'aes1_group', type: 'number', label: 'AES1 Group', default: 1, min: 1, max: 8 },
 				{ id: 'aes1_pair', type: 'number', label: 'AES1 Pair', default: 1, min: 1, max: 2 },
-				{ id: 'aes1_mode', type: 'textinput', label: 'AES1 Mode', default: '' },
-				{ id: 'aes1_transmitSource', type: 'textinput', label: 'AES1 Transmit Source', default: '' },
+				{
+					id: 'aes1_mode',
+					type: 'dropdown',
+					label: 'AES1 Mode',
+					default: 'receive',
+					choices: [
+						{ id: 'off', label: 'Off' },
+						{ id: 'receive', label: 'Receive' },
+						{ id: 'transmit', label: 'Transmit' },
+					],
+				},
+				{
+					id: 'aes1_transmitSource',
+					type: 'dropdown',
+					label: 'AES1 Transmit Source',
+					default: 'generator',
+					choices: [
+						{ id: 'analyser', label: 'Analyser' },
+						{ id: 'passthrough', label: 'Passthrough' },
+						{ id: 'dolbyDecoder1', label: 'DolbyDecoder1' },
+						{ id: 'generator', label: 'Generator' },
+					],
+				},
 
 				// AES2
 				{ id: 'aes2_group', type: 'number', label: 'AES2 Group', default: 1, min: 1, max: 8 },
 				{ id: 'aes2_pair', type: 'number', label: 'AES2 Pair', default: 1, min: 1, max: 2 },
-				{ id: 'aes2_mode', type: 'textinput', label: 'AES2 Mode', default: '' },
-				{ id: 'aes2_transmitSource', type: 'textinput', label: 'AES2 Transmit Source', default: '' },
+				{
+					id: 'aes2_mode',
+					type: 'dropdown',
+					label: 'AES2 Mode',
+					default: 'receive',
+					choices: [
+						{ id: 'off', label: 'Off' },
+						{ id: 'receive', label: 'Receive' },
+						{ id: 'transmit', label: 'Transmit' },
+					],
+				},
+				{
+					id: 'aes2_transmitSource',
+					type: 'dropdown',
+					label: 'AES2 Transmit Source',
+					default: 'generator',
+					choices: [
+						{ id: 'analyser', label: 'Analyser' },
+						{ id: 'passthrough', label: 'Passthrough' },
+						{ id: 'dolbyDecoder1', label: 'DolbyDecoder1' },
+						{ id: 'generator', label: 'Generator' },
+					],
+				},
 
 				// AES3
 				{ id: 'aes3_group', type: 'number', label: 'AES3 Group', default: 1, min: 1, max: 8 },
 				{ id: 'aes3_pair', type: 'number', label: 'AES3 Pair', default: 1, min: 1, max: 2 },
-				{ id: 'aes3_mode', type: 'textinput', label: 'AES3 Mode', default: '' },
-				{ id: 'aes3_transmitSource', type: 'textinput', label: 'AES3 Transmit Source', default: '' },
+				{
+					id: 'aes3_mode',
+					type: 'dropdown',
+					label: 'AES3 Mode',
+					default: 'receive',
+					choices: [
+						{ id: 'off', label: 'Off' },
+						{ id: 'receive', label: 'Receive' },
+						{ id: 'transmit', label: 'Transmit' },
+					],
+				},
+				{
+					id: 'aes3_transmitSource',
+					type: 'dropdown',
+					label: 'AES3 Transmit Source',
+					default: 'generator',
+					choices: [
+						{ id: 'analyser', label: 'Analyser' },
+						{ id: 'passthrough', label: 'Passthrough' },
+						{ id: 'dolbyDecoder1', label: 'DolbyDecoder1' },
+						{ id: 'generator', label: 'Generator' },
+					],
+				},
 
 				// AES4
 				{ id: 'aes4_group', type: 'number', label: 'AES4 Group', default: 1, min: 1, max: 8 },
 				{ id: 'aes4_pair', type: 'number', label: 'AES4 Pair', default: 1, min: 1, max: 2 },
-				{ id: 'aes4_mode', type: 'textinput', label: 'AES4 Mode', default: '' },
-				{ id: 'aes4_transmitSource', type: 'textinput', label: 'AES4 Transmit Source', default: '' },
+				{
+					id: 'aes4_mode',
+					type: 'dropdown',
+					label: 'AES4 Mode',
+					default: 'receive',
+					choices: [
+						{ id: 'off', label: 'Off' },
+						{ id: 'receive', label: 'Receive' },
+						{ id: 'transmit', label: 'Transmit' },
+					],
+				},
+				{
+					id: 'aes4_transmitSource',
+					type: 'dropdown',
+					label: 'AES4 Transmit Source',
+					default: 'generator',
+					choices: [
+						{ id: 'analyser', label: 'Analyser' },
+						{ id: 'passthrough', label: 'Passthrough' },
+						{ id: 'dolbyDecoder1', label: 'DolbyDecoder1' },
+						{ id: 'generator', label: 'Generator' },
+					],
+				},
 
 				// Passthrough
 				{
@@ -208,15 +292,8 @@ export function UpdateActions(self: ModuleInstance): void {
 		},
 
 		analyser_crcSummary_set: {
-			name: 'Set CRC Summary Action',
+			name: 'Ignore CRC Summary on Switch Lines',
 			options: [
-				{
-					id: 'action',
-					type: 'dropdown',
-					label: 'Action',
-					choices: ['reset'].map((x) => ({ id: x, label: x })),
-					default: 'reset',
-				},
 				{
 					id: 'ignoreCrcOnSwitchLines',
 					type: 'dropdown',
@@ -227,8 +304,16 @@ export function UpdateActions(self: ModuleInstance): void {
 			],
 			callback: async (event) => {
 				await self.apiPut('/analyser/crcSummary', {
-					action: event.options.action,
 					ignoreCrcOnSwitchLines: event.options.ignoreCrcOnSwitchLines,
+				})
+			},
+		},
+		analyser_crcSummary_Reset: {
+			name: 'CRC Summary Reset',
+			options: [],
+			callback: async () => {
+				await self.apiPut('/analyser/crcSummary', {
+					action: 'reset',
 				})
 			},
 		},
@@ -249,17 +334,6 @@ export function UpdateActions(self: ModuleInstance): void {
 		analyser_loudness_config: {
 			name: 'Loudness Config',
 			options: [
-				{
-					id: 'action',
-					type: 'dropdown',
-					label: 'Action',
-					default: 'loudnessMonitoringReset',
-					choices: [
-						{ id: 'loudnessMonitoringReset', label: 'Loudness Monitoring Reset' },
-						{ id: 'truePeakValueReset', label: 'True Peak Value Reset' },
-						{ id: 'errorCountsReset', label: 'Error Counts Reset' },
-					],
-				},
 				{
 					id: 'audioMode',
 					type: 'dropdown',
@@ -301,29 +375,38 @@ export function UpdateActions(self: ModuleInstance): void {
 					choices: [1, 7, 14, 30].map((x) => ({ id: x, label: x.toString() })),
 				},
 				{ id: 'logFilename', type: 'textinput', label: 'Log Filename', default: 'string-value' },
-				{
-					id: 'control',
-					type: 'dropdown',
-					label: 'Control',
-					default: 'start',
-					choices: ['start', 'stop', 'pause'].map((x) => ({ id: x, label: x })),
-				},
+
 				{ id: 'meterTarget_integrated', type: 'number', label: 'Target Integrated', default: -23, min: -59, max: -5 },
 				{ id: 'meterTarget_momentary', type: 'number', label: 'Target Momentary', default: -20, min: -59, max: -5 },
 				{ id: 'meterTarget_shortTerm', type: 'number', label: 'Target Short Term', default: -20, min: -59, max: -5 },
 				{
+					id: 'meterTolerance_integrated',
+					type: 'number',
+					label: 'Tolerance Integrated',
+					default: 5.0,
+					min: 0.0,
+					max: 10.0,
+				},
+				{
 					id: 'meterTolerance_momentary',
 					type: 'number',
 					label: 'Tolerance Momentary',
-					default: -3,
-					min: -59,
-					max: -5,
+					default: 5.0,
+					min: 0.0,
+					max: 10.0,
+				},
+				{
+					id: 'meterTolerance_shortTerm',
+					type: 'number',
+					label: 'Tolerance Short Term',
+					default: 5.0,
+					min: 0.0,
+					max: 10.0,
 				},
 			],
 			callback: async (event) => {
 				const o = event.options
 				const payload = {
-					action: o.action,
 					audioAssignment: {
 						audioMode: o.audioMode,
 					},
@@ -332,15 +415,59 @@ export function UpdateActions(self: ModuleInstance): void {
 					logDuration_mins: o.logDuration_mins,
 					logLifetime_days: o.logLifetime_days,
 					logFilename: o.logFilename,
-					control: o.control,
 					meterTarget: {
 						integrated: o.meterTarget_integrated,
 						momentary: o.meterTarget_momentary,
 						shortTerm: o.meterTarget_shortTerm,
 					},
 					meterTolerance: {
+						integrated: o.meterTolerance_integrated,
+						shortTerm: o.meterTolerance_shortTerm,
 						momentary: o.meterTolerance_momentary,
 					},
+				}
+				await self.apiPut('/analyser/loudness/config', payload)
+			},
+		},
+
+		analyser_loudness_config_action: {
+			name: 'Loudness Config Action',
+			options: [
+				{
+					id: 'action',
+					type: 'dropdown',
+					label: 'Action',
+					default: 'loudnessMonitoringReset',
+					choices: [
+						{ id: 'loudnessMonitoringReset', label: 'Loudness Monitoring Reset' },
+						{ id: 'truePeakValueReset', label: 'True Peak Value Reset' },
+						{ id: 'errorCountsReset', label: 'Error Counts Reset' },
+					],
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					action: o.action,
+				}
+				await self.apiPut('/analyser/loudness/config', payload)
+			},
+		},
+		analyser_loudness_config_control: {
+			name: 'Loudness Control',
+			options: [
+				{
+					id: 'control',
+					type: 'dropdown',
+					label: 'Control',
+					default: 'start',
+					choices: ['start', 'stop', 'pause'].map((x) => ({ id: x, label: x })),
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					control: o.control,
 				}
 				await self.apiPut('/analyser/loudness/config', payload)
 			},
@@ -514,12 +641,13 @@ export function UpdateActions(self: ModuleInstance): void {
 					id: 'location',
 					type: 'dropdown',
 					label: 'Location',
-					default: 'left',
+					default: 'subImage1',
 					choices: [
 						{ id: 'subImage1', label: 'subImage1' },
 						{ id: 'subImage2', label: 'subImage2' },
 						{ id: 'subImage3', label: 'subImage3' },
 						{ id: 'subImage4', label: 'subImage4' },
+						{ id: 'aes', label: 'AES' },
 					],
 				},
 				{
@@ -791,7 +919,7 @@ export function UpdateActions(self: ModuleInstance): void {
 					id: 'analysisMethod',
 					type: 'textinput',
 					label: 'Analysis Method',
-					default: 'an Met',
+					default: '',
 				},
 			],
 			callback: async (event) => {
@@ -992,18 +1120,7 @@ export function UpdateActions(self: ModuleInstance): void {
 
 		GeneratorBouncingBoxEnabled: {
 			name: 'Enable Generator Bouncing Box',
-			options: [
-				{
-					id: 'action',
-					type: 'dropdown',
-					label: 'Action',
-					default: 'enable',
-					choices: [
-						{ id: 'enable', label: 'Enable' },
-						{ id: 'disable', label: 'Disable' },
-					],
-				},
-			],
+			options: [{ id: 'action', type: 'checkbox', label: 'Enabled', default: true }],
 			callback: async (event) => {
 				const o = event.options
 				const payload = {
@@ -1162,11 +1279,12 @@ export function UpdateActions(self: ModuleInstance): void {
 			callback: async (event) => {
 				const o = event.options
 				const payload = {
+					enabled: o.enabled,
 					AmplitudePeakToPeak_ui: o.amplitudePeakToPeakUi,
 					frequency_Hz: o.frequencyHz,
 					mode: o.mode,
 				}
-				await self.apiPut('/generator/bouncingBox', payload)
+				await self.apiPut('/generator/jitterInsertion', payload)
 			},
 		},
 		GeneratorOutputCopyEnabled: {
@@ -1175,7 +1293,7 @@ export function UpdateActions(self: ModuleInstance): void {
 				{
 					id: 'action',
 					type: 'checkbox',
-					label: 'Action',
+					label: 'Enabled',
 					default: true,
 				},
 			],
@@ -1187,37 +1305,19 @@ export function UpdateActions(self: ModuleInstance): void {
 				await self.apiPut('/generator/outputCopy', payload)
 			},
 		},
-		GeneratorOutputOffset: {
-			name: 'Configure Generator Output Offset',
+		GeneratorOutputOffsetClear: {
+			name: 'Clear Generator Output Offset',
+			options: [],
+			callback: async () => {
+				const payload = {
+					action: 'clearOffsets',
+				}
+				await self.apiPut('/generator/outputOffset', payload)
+			},
+		},
+		GeneratorOutputOffsetTime: {
+			name: 'Configure Generator Output Offset by Time',
 			options: [
-				{
-					id: 'action',
-					type: 'dropdown',
-					label: 'Action',
-					default: '',
-					choices: [
-						{ id: '', label: 'Nothing' },
-						{ id: 'clearOffsets', label: 'Clear Offsets' },
-					],
-				},
-				{
-					id: 'offsetType',
-					type: 'dropdown',
-					label: 'Offset Type',
-					default: 'linesAndPixels',
-					choices: [
-						{ id: 'linesAndPixels', label: 'Lines and Pixels' },
-						{ id: 'time', label: 'Time' },
-					],
-				},
-				{
-					id: 'outputLineOffset',
-					type: 'number',
-					label: 'Output Line Offset',
-					default: 0,
-					min: -999999,
-					max: 999999,
-				},
 				{
 					id: 'outputTimeOffsetus',
 					type: 'number',
@@ -1230,15 +1330,43 @@ export function UpdateActions(self: ModuleInstance): void {
 			callback: async (event) => {
 				const o = event.options
 				const payload = {
-					action: o.action,
-					offsetType: o.offsetType,
-					outputLineOffset: o.outputLineOffset,
-					outputPixelOffset: o.outputPixelOffset,
-					outputTimeOffset_us: o.outputTimeOffset_us,
+					offsetType: 'time',
+					ooutputTimeOffset_us: o.outputTimeOffsetus,
 				}
 				await self.apiPut('/generator/outputOffset', payload)
 			},
 		},
+		GeneratorOutputOffsetLinesAndPixels: {
+			name: 'Configure Generator Output Offset by Lines and Pixels',
+			options: [
+				{
+					id: 'outputLineOffset',
+					type: 'number',
+					label: 'Output Line Offset',
+					default: 0,
+					min: -999999,
+					max: 999999,
+				},
+				{
+					id: 'outputPixelOffset',
+					type: 'number',
+					label: 'Output Pixel Offset',
+					default: 0,
+					min: -999999,
+					max: 999999,
+				},
+			],
+			callback: async (event) => {
+				const o = event.options
+				const payload = {
+					offsetType: 'linesAndPixels',
+					outputLineOffset: o.outputLineOffset,
+					outputPixelOffset: o.outputPixelOffset,
+				}
+				await self.apiPut('/generator/outputOffset', payload)
+			},
+		},
+
 		GeneratorPrbs: {
 			name: 'Configure Generator PRBS',
 			options: [
@@ -1368,17 +1496,17 @@ export function UpdateActions(self: ModuleInstance): void {
 					id: 'format',
 					type: 'dropdown',
 					label: 'Format',
-					default: 'YCbCr:422:10',
+					default: 'YCbCr%3A422%3A10',
 					choices: [
-						{ id: 'YCbCr:422:10', label: 'YCbCr:422:10' },
-						{ id: 'YCbCr:422:12', label: 'YCbCr:422:12' },
-						{ id: 'YCbCrA:4224:12', label: 'YCbCrA:4224:12' },
-						{ id: 'YCbCr:444:10', label: 'YCbCr:444:10' },
-						{ id: 'YCbCr:444:12', label: 'YCbCr:444:12' },
-						{ id: 'YCbCrA:4444:10', label: 'YCbCrA:4444:10' },
-						{ id: 'RGB:444:10', label: 'RGB:444:10' },
-						{ id: 'RGB:444:12', label: 'RGB:444:12' },
-						{ id: 'RGBA:4444:10', label: 'RGBA:4444:10' },
+						{ id: 'YCbCr%3A422%3A10', label: 'YCbCr:422:10' },
+						{ id: 'YCbCr%3A422%3A12', label: 'YCbCr:422:12' },
+						{ id: 'YCbCrA%3A4224%3A12', label: 'YCbCrA:4224:12' },
+						{ id: 'YCbCr%3A444%3A10', label: 'YCbCr:444:10' },
+						{ id: 'YCbCr%3A444%3A12', label: 'YCbCr:444:12' },
+						{ id: 'YCbCrA%3A4444%3A10', label: 'YCbCrA:4444:10' },
+						{ id: 'RGB%3A444%3A10', label: 'RGB:444:10' },
+						{ id: 'RGB%3A444%3A12', label: 'RGB:444:12' },
+						{ id: 'RGBA%3A4444%3A10', label: 'RGBA:4444:10' },
 					],
 				},
 				{
@@ -1411,7 +1539,7 @@ export function UpdateActions(self: ModuleInstance): void {
 					id: 'gamut',
 					type: 'dropdown',
 					label: 'Gamut',
-					default: '709',
+					default: 'Rec.709',
 					choices: [
 						{ id: 'Rec.709', label: '709' },
 						{ id: 'Rec.2020', label: '2020' },
@@ -1424,10 +1552,10 @@ export function UpdateActions(self: ModuleInstance): void {
 					id: 'type',
 					type: 'dropdown',
 					label: 'Type',
-					default: '3G A',
+					default: '3G%20A',
 					choices: [
-						{ id: '12G 2-SI', label: '12G 2-SI' },
-						{ id: 'QL 3G A 2-SI', label: 'QL 3G A 2-SI' },
+						{ id: '12G%202-SI', label: '12G 2-SI' },
+						{ id: 'QL3G A 2-SI', label: 'QL 3G A 2-SI' },
 						{ id: 'QL 3G A SqDv', label: 'QL 3G A SqDv' },
 						{ id: 'QL 3G B 2-SI', label: 'QL 3G B 2-SI' },
 						{ id: 'QL 3G B SqDv', label: 'QL 3G B SqDv' },
@@ -1556,7 +1684,7 @@ export function UpdateActions(self: ModuleInstance): void {
 					id: 'type',
 					type: 'dropdown',
 					label: 'SDI Input Type',
-					default: 'BNC',
+					default: 'bnc',
 					choices: [
 						{ id: 'bnc', label: 'BNC' },
 						{ id: 'sfp', label: 'SFP' },
@@ -1673,7 +1801,7 @@ export function UpdateActions(self: ModuleInstance): void {
 					id: 'type',
 					type: 'dropdown',
 					label: 'SDI Output Type',
-					default: 'BNC',
+					default: 'bnc',
 					choices: [
 						{ id: 'bnc', label: 'BNC' },
 						{ id: 'sfp', label: 'SFP' },
@@ -1725,7 +1853,6 @@ export function UpdateActions(self: ModuleInstance): void {
 				const o = event.options
 				const payload = {
 					sdiOutputA: o.sdiOutputA,
-
 					sdiOutputB: o.sdiOutputB,
 				}
 				await self.apiPut('/inputOutput/sdiOut/sfp/sdiOutputSetting', payload)
